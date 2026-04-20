@@ -1,0 +1,136 @@
+# Smithery Registry — HiveCapital MCP Server
+
+startCommand:
+  type: http
+  configSchema:
+    type: object
+    properties:
+      did:
+        type: string
+        description: "Agent DID. Obtain free at hivegate.onrender.com"
+      api_key:
+        type: string
+        description: "Agent API key"
+    required: []
+  url: https://hivecapital.onrender.com/mcp
+
+name: hivecapital-mcp
+displayName: HiveCapital — Autonomous Agent Investment Layer
+version: "1.0.0"
+description: >
+  Autonomous investment infrastructure for AI agents. Agents deploy USDC into
+  yield strategies, liquidity pools, and HiveExchange prediction markets.
+  Capital governed by HiveLaw mandates. Portfolio tracked in real-time via
+  PostgreSQL. Settlement on Base L2 USDC. Earn yield from HiveSwap LP fees,
+  HiveExchange market making, and HiveCompute compute staking.
+  Part of the Hive Civilization trust and settlement network (thehiveryiq.com).
+
+author:
+  name: Steve Rotzin
+  email: steve@thehiveryiq.com
+  url: https://www.thehiveryiq.com
+
+license: MIT
+homepage: https://www.thehiveryiq.com
+repository:
+  type: git
+  url: https://github.com/srotzin/hivecapital
+
+transport: streamable-http
+endpoint: https://hivecapital.onrender.com/mcp
+protocol: "2024-11-05"
+
+categories:
+  - finance
+  - agent-to-agent
+  - defi
+  - web3
+  - payments
+
+tags:
+  - mcp
+  - hive
+  - capital
+  - investment
+  - yield
+  - portfolio
+  - usdc
+  - base-l2
+  - defai
+  - ai-agents
+  - autonomous-finance
+
+tools:
+  - name: capital_get_strategies
+    description: >
+      List available yield strategies — HiveSwap LP, HiveExchange market making,
+      prediction market staking, compute node staking. Shows APY, risk level,
+      lockup period, and current TVL. No auth required.
+    inputs:
+      - name: min_apy
+        type: number
+        required: false
+        description: "Minimum APY filter"
+      - name: risk_level
+        type: string
+        required: false
+        description: "Risk filter: low, medium, high"
+
+  - name: capital_deploy
+    description: >
+      Deploy USDC into a yield strategy. Agent-signed. Settlement via HiveBank
+      on Base L2. Returns position ID and projected APY.
+    inputs:
+      - name: strategy_id
+        type: string
+        required: true
+        description: "Strategy ID from capital_get_strategies"
+      - name: amount_usdc
+        type: number
+        required: true
+        description: "Amount to deploy in USDC"
+      - name: did
+        type: string
+        required: true
+      - name: api_key
+        type: string
+        required: true
+
+  - name: capital_portfolio
+    description: >
+      Get an agent's full capital portfolio — active positions, unrealized P&L,
+      earned yield, and total AUM in USDC.
+    inputs:
+      - name: did
+        type: string
+        required: true
+      - name: api_key
+        type: string
+        required: true
+
+  - name: capital_withdraw
+    description: >
+      Withdraw from a capital position. Settled to agent wallet on Base L2.
+    inputs:
+      - name: position_id
+        type: string
+        required: true
+      - name: amount_usdc
+        type: number
+        required: false
+        description: "Partial withdrawal amount (omit for full withdrawal)"
+      - name: did
+        type: string
+        required: true
+      - name: api_key
+        type: string
+        required: true
+
+runtime:
+  type: node
+  version: ">=18"
+  command: node server.js
+  env:
+    - name: PORT
+      default: "3460"
+      required: false
