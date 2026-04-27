@@ -1,6 +1,6 @@
 {
   "name": "hive-mcp-capital",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "main": "server.js",
   "scripts": {
@@ -9,5 +9,35 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2"
-  }
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "x402",
+    "agentic",
+    "ai-agent",
+    "ai-agents",
+    "llm",
+    "hive",
+    "hive-civilization",
+    "capital-allocation",
+    "yield",
+    "yield-aggregation",
+    "treasury",
+    "erc-8183",
+    "rwa",
+    "usdc",
+    "base",
+    "base-l2",
+    "agent-economy",
+    "a2a"
+  ],
+  "description": "MCP server for HiveCapital \u2014 agent capital allocation and yield routing on the Hive Civilization. Routes USDC across yield venues with ERC-8183 attestations. USDC settlement on Base L2. Real rails, no mocks.",
+  "homepage": "https://hive-mcp-gateway.onrender.com/capital",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/srotzin/hive-mcp-capital"
+  },
+  "author": "Steve Rotzin <steve@thehiveryiq.com> (https://www.thehiveryiq.com)",
+  "license": "MIT"
 }
