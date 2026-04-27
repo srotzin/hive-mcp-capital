@@ -1,13 +1,13 @@
 <!-- HIVE_BANNER_V1 -->
 <p align="center">
   <a href="https://hive-mcp-gateway.onrender.com/capital/health">
-    <img src="https://hive-mcp-gateway.onrender.com/capital/og.svg" alt="HiveCapital · Agent Capital Allocation & Yield Routing MCP" width="100%"/>
+    <img src="https://hive-mcp-gateway.onrender.com/capital/og.svg" alt="HiveCapital · Agent Equity, Credit & Capability Staking MCP" width="100%"/>
   </a>
 </p>
 
 <h1 align="center">hive-mcp-capital</h1>
 
-<p align="center"><strong>Capital allocation, yield routing, ERC-8183 attestations for agent treasuries.</strong></p>
+<p align="center"><strong>Agent equity markets, credit markets, and capability staking. USDC on Base L2.</strong></p>
 
 <p align="center">
   <a href="https://smithery.ai/server/hivecivilization"><img alt="Smithery" src="https://img.shields.io/badge/Smithery-hivecivilization-C08D23?style=flat-square"/></a>
@@ -25,13 +25,13 @@
 
 # HiveCapital
 
-**Capital allocation, yield routing, ERC-8183 attestations for agent treasuries.**
+**Agent equity markets, credit markets, and capability staking. USDC on Base L2.**
 
-MCP server for HiveCapital — agent capital allocation and yield routing on the Hive Civilization. Routes USDC across yield venues with ERC-8183 attestations. USDC settlement on Base L2. Real rails, no mocks.
+MCP server for HiveCapital — autonomous investment layer for agent equity, credit markets, and capability staking. Deploy capital, earn yield, and stake agent capabilities via x402-gated USDC settlement on Base L2. Real rails, no mocks.
 
 ## What this is
 
-`hive-mcp-capital` is a Model Context Protocol (MCP) server that exposes the HiveCapital surface on the Hive Civilization to any MCP-compatible client (Claude Desktop, Cursor, Manus, etc.). The server proxies to the live production gateway at `https://hive-mcp-gateway.onrender.com`.
+`hive-mcp-capital` is a Model Context Protocol (MCP) server that exposes the HiveCapital platform on the Hive Civilization to any MCP-compatible client (Claude Desktop, Cursor, Manus, etc.). The server proxies to the live production gateway at `https://hive-mcp-gateway.onrender.com`.
 
 - **Protocol:** MCP 2024-11-05 over Streamable-HTTP / JSON-RPC 2.0
 - **x402 micropayments:** every paid call produces a real on-chain settlement
@@ -49,9 +49,9 @@ MCP server for HiveCapital — agent capital allocation and yield routing on the
 | `GET  /.well-known/security.txt` | RFC 9116 security contact |
 | `GET  /robots.txt` | Allow-all crawl policy |
 | `GET  /sitemap.xml` | Crawler sitemap |
-| `GET  /og.svg` | 1200x630 Hive-gold OG image |
+| `GET  /og.svg` | 1200×630 Hive-gold OG image |
 | `GET  /seo.json` | JSON-LD structured data (SoftwareApplication) |
 
 ## License
 
-MIT. Steve Rotzin / Hive Civilization. Brand gold `#C08D23` (Pantone 1245 C). Never `#f5c518`.
+MIT. © Steve Rotzin / Hive Civilization. Brand gold `#C08D23` (Pantone 1245 C). Never `#f5c518`.
