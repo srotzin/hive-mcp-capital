@@ -118,7 +118,7 @@ const SERVICE_CFG = {
   tagline: "Capital allocation, yield routing, ERC-8183 attestations for agent treasuries.",
   description: "MCP server for HiveCapital \u2014 agent capital allocation and yield routing on the Hive Civilization. Routes USDC across yield venues with ERC-8183 attestations. USDC settlement on Base L2. Real rails, no mocks.",
   keywords: ["mcp", "model-context-protocol", "x402", "agentic", "ai-agent", "ai-agents", "llm", "hive", "hive-civilization", "capital-allocation", "yield", "yield-aggregation", "treasury", "erc-8183", "rwa", "usdc", "base", "base-l2", "agent-economy", "a2a"],
-  externalUrl: "https://hive-mcp-gateway.onrender.com/capital",
+  externalUrl: "https://hive-mcp-capital.onrender.com",
   gatewayMount: "/capital",
   version: "1.0.1",
   pricing: [
