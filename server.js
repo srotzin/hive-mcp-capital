@@ -336,6 +336,171 @@ app.use((req, res) => {
   });
 });
 
+
+// ─── Schema discoverability routes ────────────────────────────────────────
+app.get('/.well-known/agent-card.json', (req, res) => {
+  res.json({
+  "name": "hive-mcp-capital",
+  "description": "MCP server for HiveCapital \u2014 autonomous investment layer for agent equity, credit markets, and capability staking. Deploy capital, earn yield, and stake agent capabilities via x402-gated USDC settlement on Base L2. Real rails, no mocks.",
+  "url": "https://hive-mcp-capital.onrender.com",
+  "provider": {
+    "organization": "Hive Civilization",
+    "url": "https://www.thehiveryiq.com",
+    "contact": "steve@thehiveryiq.com"
+  },
+  "version": "1.0.1",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "stateTransitionHistory": false
+  },
+  "authentication": {
+    "schemes": [
+      "x402"
+    ],
+    "credentials": {
+      "type": "x402",
+      "asset": "USDC",
+      "network": "base",
+      "asset_address": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "recipient": "0x15184bf50b3d3f52b60434f8942b7d52f2eb436e"
+    }
+  },
+  "defaultInputModes": [
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "application/json"
+  ],
+  "skills": []
+});
+});
+
+app.get('/.well-known/ap2.json', (req, res) => {
+  res.json({
+  "ap2_version": "1",
+  "agent": {
+    "name": "hive-mcp-capital",
+    "did": "did:web:hive-mcp-capital.onrender.com",
+    "description": "MCP server for HiveCapital \u2014 autonomous investment layer for agent equity, credit markets, and capability staking. Deploy capital, earn yield, and stake agent capabilities via x402-gated USDC settlement on Base L2. Real rails, no mocks."
+  },
+  "endpoints": {
+    "mcp": "https://hive-mcp-capital.onrender.com/mcp",
+    "agent_card": "https://hive-mcp-capital.onrender.com/.well-known/agent-card.json"
+  },
+  "payments": {
+    "schemes": [
+      "x402"
+    ],
+    "primary": {
+      "scheme": "x402",
+      "network": "base",
+      "asset": "USDC",
+      "asset_address": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "recipient": "0x15184bf50b3d3f52b60434f8942b7d52f2eb436e"
+    }
+  },
+  "brand": {
+    "color": "#C08D23",
+    "name": "Hive Civilization"
+  }
+});
+});
+
+app.get('/openapi.json', (req, res) => {
+  res.json({
+  "openapi": "3.0.3",
+  "info": {
+    "title": "hive-mcp-capital",
+    "version": "1.0.1",
+    "description": "MCP server for HiveCapital \u2014 autonomous investment layer for agent equity, credit markets, and capability staking. Deploy capital, earn yield, and stake agent capabilities via x402-gated USDC settlement on Base L2. Real rails, no mocks.",
+    "contact": {
+      "email": "steve@thehiveryiq.com"
+    },
+    "x-brand-color": "#C08D23",
+    "x-organization": "Hive Civilization"
+  },
+  "servers": [
+    {
+      "url": "https://hive-mcp-capital.onrender.com"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "GET /health",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/mcp": {
+      "post": {
+        "summary": "POST /mcp",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "GET /",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/og.svg": {
+      "get": {
+        "summary": "GET /og.svg",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/robots.txt": {
+      "get": {
+        "summary": "GET /robots.txt",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/sitemap.xml": {
+      "get": {
+        "summary": "GET /sitemap.xml",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/seo.json": {
+      "get": {
+        "summary": "GET /seo.json",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+});
+});
+
+
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`[hivecapital-mcp] Running on port ${PORT}`);
   console.log(`[hivecapital-mcp] MCP endpoint: http://localhost:${PORT}/mcp`);
