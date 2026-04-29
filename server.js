@@ -337,168 +337,73 @@ app.use((req, res) => {
 });
 
 
-// ─── Schema discoverability routes ────────────────────────────────────────
-app.get('/.well-known/agent-card.json', (req, res) => {
-  res.json({
-  "name": "hive-mcp-capital",
-  "description": "MCP server for HiveCapital \u2014 autonomous investment layer for agent equity, credit markets, and capability staking. Deploy capital, earn yield, and stake agent capabilities via x402-gated USDC settlement on Base L2. Real rails, no mocks.",
-  "url": "https://hive-mcp-capital.onrender.com",
-  "provider": {
-    "organization": "Hive Civilization",
-    "url": "https://www.thehiveryiq.com",
-    "contact": "steve@thehiveryiq.com"
+// ─── Schema discoverability ────────────────────────────────────────────────
+const AGENT_CARD = {
+  name: SERVICE,
+  description: `MCP server for HiveCapital — autonomous investment layer for agent equity, credit markets, and capability staking. Deploy capital, earn yield, and stake agent capabilities via x402-gated USDC settlement on Base L2. Real rails, no mocks.. New agents: first call free. Loyalty: every 6th paid call is free. Pay in USDC on Base L2.`,
+  url: `https://${SERVICE}.onrender.com`,
+  provider: {
+    organization: 'Hive Civilization',
+    url: 'https://www.thehiveryiq.com',
+    contact: 'steve@thehiveryiq.com',
   },
-  "version": "1.0.1",
-  "capabilities": {
-    "streaming": false,
-    "pushNotifications": false,
-    "stateTransitionHistory": false
+  version: VERSION,
+  capabilities: {
+    streaming: false,
+    pushNotifications: false,
+    stateTransitionHistory: false,
   },
-  "authentication": {
-    "schemes": [
-      "x402"
-    ],
-    "credentials": {
-      "type": "x402",
-      "asset": "USDC",
-      "network": "base",
-      "asset_address": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
-      "recipient": "0x15184bf50b3d3f52b60434f8942b7d52f2eb436e"
-    }
+  authentication: {
+    schemes: ['x402'],
+    credentials: {
+      type: 'x402',
+      asset: 'USDC',
+      network: 'base',
+      asset_address: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
+      recipient: '0x15184bf50b3d3f52b60434f8942b7d52f2eb436e',
+    },
   },
-  "defaultInputModes": [
-    "application/json"
-  ],
-  "defaultOutputModes": [
-    "application/json"
-  ],
-  "skills": []
-});
-});
+  defaultInputModes: ['application/json'],
+  defaultOutputModes: ['application/json'],
+  skills: TOOLS.map(t => ({ name: t.name, description: t.description })),
+  extensions: {
+    hive_pricing: {
+      currency: 'USDC',
+      network: 'base',
+      model: 'per_call',
+      first_call_free: true,
+      loyalty_threshold: 6,
+      loyalty_message: 'Every 6th paid call is free',
+    },
+  },
+};
 
-app.get('/.well-known/ap2.json', (req, res) => {
-  res.json({
-  "ap2_version": "1",
-  "agent": {
-    "name": "hive-mcp-capital",
-    "did": "did:web:hive-mcp-capital.onrender.com",
-    "description": "MCP server for HiveCapital \u2014 autonomous investment layer for agent equity, credit markets, and capability staking. Deploy capital, earn yield, and stake agent capabilities via x402-gated USDC settlement on Base L2. Real rails, no mocks."
+const AP2 = {
+  ap2_version: '1',
+  agent: {
+    name: SERVICE,
+    did: `did:web:${SERVICE}.onrender.com`,
+    description: `MCP server for HiveCapital — autonomous investment layer for agent equity, credit markets, and capability staking. Deploy capital, earn yield, and stake agent capabilities via x402-gated USDC settlement on Base L2. Real rails, no mocks.. New agents: first call free. Loyalty: every 6th paid call is free. Pay in USDC on Base L2.`,
   },
-  "endpoints": {
-    "mcp": "https://hive-mcp-capital.onrender.com/mcp",
-    "agent_card": "https://hive-mcp-capital.onrender.com/.well-known/agent-card.json"
+  endpoints: {
+    mcp: `https://${SERVICE}.onrender.com/mcp`,
+    agent_card: `https://${SERVICE}.onrender.com/.well-known/agent-card.json`,
   },
-  "payments": {
-    "schemes": [
-      "x402"
-    ],
-    "primary": {
-      "scheme": "x402",
-      "network": "base",
-      "asset": "USDC",
-      "asset_address": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
-      "recipient": "0x15184bf50b3d3f52b60434f8942b7d52f2eb436e"
-    }
+  payments: {
+    schemes: ['x402'],
+    primary: {
+      scheme: 'x402',
+      network: 'base',
+      asset: 'USDC',
+      asset_address: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
+      recipient: '0x15184bf50b3d3f52b60434f8942b7d52f2eb436e',
+    },
   },
-  "brand": {
-    "color": "#C08D23",
-    "name": "Hive Civilization"
-  }
-});
-});
+  brand: { color: '#C08D23', name: 'Hive Civilization' },
+};
 
-app.get('/openapi.json', (req, res) => {
-  res.json({
-  "openapi": "3.0.3",
-  "info": {
-    "title": "hive-mcp-capital",
-    "version": "1.0.1",
-    "description": "MCP server for HiveCapital \u2014 autonomous investment layer for agent equity, credit markets, and capability staking. Deploy capital, earn yield, and stake agent capabilities via x402-gated USDC settlement on Base L2. Real rails, no mocks.",
-    "contact": {
-      "email": "steve@thehiveryiq.com"
-    },
-    "x-brand-color": "#C08D23",
-    "x-organization": "Hive Civilization"
-  },
-  "servers": [
-    {
-      "url": "https://hive-mcp-capital.onrender.com"
-    }
-  ],
-  "paths": {
-    "/health": {
-      "get": {
-        "summary": "GET /health",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/mcp": {
-      "post": {
-        "summary": "POST /mcp",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/": {
-      "get": {
-        "summary": "GET /",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/og.svg": {
-      "get": {
-        "summary": "GET /og.svg",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/robots.txt": {
-      "get": {
-        "summary": "GET /robots.txt",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/sitemap.xml": {
-      "get": {
-        "summary": "GET /sitemap.xml",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/seo.json": {
-      "get": {
-        "summary": "GET /seo.json",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    }
-  }
-});
-});
+app.get('/.well-known/agent-card.json', (req, res) => res.json(AGENT_CARD));
+app.get('/.well-known/ap2.json', (req, res) => res.json(AP2));
 
 
 app.listen(PORT, '0.0.0.0', () => {
